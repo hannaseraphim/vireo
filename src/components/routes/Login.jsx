@@ -30,7 +30,6 @@ function Login() {
         const apiUrl = import.meta.env.VITE_API_URL;
         axios.post(`${apiUrl}/auth/login`, formData)
         .then(res => {
-            console.log('User logged in:', res.data);
             localStorage.setItem('vireoAccessToken', res.data.token);
             navigate('/')
         }).catch(error => {

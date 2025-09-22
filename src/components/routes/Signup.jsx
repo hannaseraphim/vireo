@@ -38,7 +38,6 @@ function Signup() {
         const apiUrl = import.meta.env.VITE_API_URL;
         axios.post(`${apiUrl}/auth/signup`, formData)
         .then(res => {
-            console.log('User sent to database:', res.data);
             localStorage.setItem('vireoAccessToken', res.data.token);
             navigate('/')
         }).catch(error => {
