@@ -9,8 +9,9 @@ function Home() {
             try{
                 const token = localStorage.getItem('vireoAccessToken');
                 if(!token) return;
-
-                const res = await axios.get('http://localhost:4000/users/me', {
+                const apiUrl = import.meta.env.VITE_API_URL
+                
+                const res = await axios.get(`${apiUrl}/users/me`, {
                     headers: { Authorization: `Bearer ${token}`}
                 });
 
