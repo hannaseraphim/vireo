@@ -1,0 +1,79 @@
+.--container-grid-home {
+    display: grid;
+    grid-template-areas: 
+    "groups account header header"
+    "groups dms  page  page"
+    "groups dms  page  page"
+    "groups dms  page  page";
+    grid-template-columns: 70px 18rem 1fr 1fr;
+    grid-template-rows: 4.5rem 1fr 1fr 1fr;
+    height: 100vh;
+    width: 100vw;
+}
+
+.--container-grid-groups {
+    grid-area: groups;
+    border: .5px solid #fff;
+    border-right: 0;
+}
+
+.--container-grid-dms {
+    grid-area: dms;
+    border: .5px solid #fff;
+    border-right: 0
+}
+
+.--container-grid-account {
+    grid-area: account;
+    border: .5px solid #fff;
+    border-right: 0;
+    border-bottom: 0
+}
+
+.--container-grid-header {
+    grid-area: header;
+    border: .5px solid #fff;
+    border-bottom: 0;
+}
+
+.--container-grid-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: page;
+    border: .5px solid #fff
+}
+
+
+/* Lounge page */
+.--grid-lounge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.--grid-lounge > h1 {
+    color: var(--text-color)
+}
+
+.--grid-lounge > p {
+    color: var(--paragraph-color)
+}
+
+.lounge-logoff-button {
+    background-color: transparent;
+    border-radius: 5px;
+    color: var(--text-color);
+    border: 1px solid var(--emerald-pulse);
+    position: absolute;
+    margin: 1em;
+    padding: 1em;
+    width: 10em;
+    bottom: 0;
+    cursor: pointer;
+}
+
+.lounge-logoff-button:hover {
+    background-color: var(--emerald-pulse)
+}

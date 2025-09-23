@@ -11,12 +11,14 @@
 [data-theme='dark'] {
     --bg-color: linear-gradient(159deg,rgb(21, 21, 21) 0%, rgb(21, 21, 21) 100%);
     --text-color: #f5f5f5;
+    --paragraph-color: #757575;
 }
 
 [data-theme='amoled'] {
   --bg-color: linear-gradient(159deg,rgb(0, 0, 0) 0%, rgb(0, 0, 0) 100%);
   --text-color: #f5f5f5;
   --form-input-border: #f5f5f5;
+  --paragraph-color: #818181;
 }
 
 [data-theme='light'] {
@@ -30,4 +32,5 @@
   --text-color: #f5f5f5;
   --form-input-border: #f5f5f5;
   --footer-text-color: #ededed;
+  --paragraph-color: #818181;
 }

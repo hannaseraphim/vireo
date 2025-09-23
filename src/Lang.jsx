@@ -1,12 +1,11 @@
 import i18n from 'i18next';
 import { initReactI18next }  from 'react-i18next';
-import pt from './locales/pt-br.json';
+// import pt from './locales/pt-br.json';
 import en from './locales/en-us.json';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 const resources = {
     'en-US': {translation: en},
-    'pt-BR': {translation: pt}
 };
 
 i18n    

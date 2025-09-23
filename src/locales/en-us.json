@@ -1,7 +1,6 @@
 {
-    "welcomeHerMessage": "Welcome, {{user}}",
-    "welcomeHimMessage": "Welcome, {{user}}",
-    "welcomeNeutralMessage": "Welcome, {{user}}",
+    "welcomeMessage": "Welcome, {{user}}",
+    "howsGoingToday": "How are you today?",
     "formPasswordsMismatch": "Passwords do not match.",
     "formUserAlreadyExists": "This user already exists.",
     "formUserNotFound": "No user was found with these credentials.",

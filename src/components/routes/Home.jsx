@@ -1,27 +1,21 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import './Home.css'
+import { useState } from 'react';
+import Lounge from '../layout/Lounge';
 
 function Home() {
-    const [nickName, setNickName] = useState('');
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            try{
-                const apiUrl = import.meta.env.VITE_API_URL
-                
-                const res = await axios.get(`${apiUrl}/users/me`, {withCredentials: true});
-                setNickName(res.data.nickName);
-                let userTheme = res.data.preferedTheme || 'dark'
-                document.documentElement.setAttribute('data-theme', userTheme)
-            } catch(err) {
-                console.error('Error while searching for user:', err.response?.data || err.message);
-            }
-        }
-        fetchUser();
-    }, [])
-
+    const [page, setPage] = useState('')
     return(
-        <div className="h1">Welcome, {nickName}</div>
+        <div className="--container-grid-home">
+            <div className="--container-grid-groups"></div>
+            <div className="--container-grid-dms"></div>
+            <div className="--container-grid-account"></div>
+            <div className="--container-grid-header"></div>
+            <div className="--container-grid-page">
+                <div className="--grid-page">
+                    <Lounge />  
+                </div>
+            </div>
+        </div>
     )
 }
 
