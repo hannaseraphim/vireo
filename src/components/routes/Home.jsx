@@ -7,18 +7,12 @@ function Home() {
     useEffect(() => {
         const fetchUser = async () => {
             try{
-                const token = localStorage.getItem('vireoAccessToken');
-                if(!token) return;
                 const apiUrl = import.meta.env.VITE_API_URL
                 
-                const res = await axios.get(`${apiUrl}/users/me`, {
-                    headers: { Authorization: `Bearer ${token}`}
-                });
-
+                const res = await axios.get(`${apiUrl}/users/me`, {withCredentials: true});
                 setNickName(res.data.nickName);
-                localStorage.setItem('vireoPreferedTheme', res.data.preferedTheme)
-                let userTheme = localStorage.getItem('vireoPreferedTheme')
-                document.documentElement.setAttribute('data-theme', userTheme || 'dark')
+                let userTheme = res.data.preferedTheme || 'dark'
+                document.documentElement.setAttribute('data-theme', userTheme)
             } catch(err) {
                 console.error('Error while searching for user:', err.response?.data || err.message);
             }

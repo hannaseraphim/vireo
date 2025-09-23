@@ -3,19 +3,17 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const ProtectedRoute = ({children}) => {
-    const isAuthenticated = localStorage.getItem('vireoAccessToken');
     const [valid, setValid] = useState(null);
     const apiUrl = import.meta.env.VITE_API_URL
 
     useEffect(() => {
-        if(!isAuthenticated) return setValid(false);
-        axios.get(`${apiUrl}/users/me`, {headers: { Authorization: `Bearer ${isAuthenticated}`}})
-        .then(res => {if (res.data && res.data._id) {setValid(true);}else{localStorage.removeItem('vireoAccessToken');setValid(false);}})
-        .catch(() => {localStorage.removeItem('vireoAccessToken');setValid(false);});
+        axios.get(`${apiUrl}/users/me`, {withCredentials: true})
+        .then(res => {if (res.data && res.data._id) {setValid(true);}else{setValid(false);}})
+        .catch(() => {setValid(false);});
     }, [])
 
     if (valid === null) return <h1>Loading...</h1>
-    if (!valid) return <Navigate to='/signup'/>;
+    if (!valid) return <Navigate to='/login'/>;
     return children;
 }
 

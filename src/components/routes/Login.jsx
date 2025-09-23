@@ -10,6 +10,7 @@ function Login() {
     const [mismatchMessage, setMismatchMessage] = useState('')
     const [showPassword, setShowPassword] = useState({main: true});
     const [passwordMain, setPasswordMain] = useState('');
+    const [credential, setCredential] = useState('')
 
     const {t} = useTranslation();
 
@@ -22,15 +23,15 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const email = (e.target.email.value).toLowerCase()
+        const emailOrUsername = credential
         const passwordHash = passwordMain;
         const formData = {
-            email, passwordHash
+            emailOrUsername, passwordHash
         }
+
         const apiUrl = import.meta.env.VITE_API_URL;
-        axios.post(`${apiUrl}/auth/login`, formData)
+        axios.post(`${apiUrl}/auth/login`, formData, {withCredentials: true})
         .then(res => {
-            localStorage.setItem('vireoAccessToken', res.data.token);
             navigate('/')
         }).catch(error => {
             console.error('Error during login:', error.response?.data || error.message)
@@ -45,9 +46,9 @@ function Login() {
                 <h1>{t('formLogInTitle')}</h1>
                 <form className="--form-content" onSubmit={handleSubmit}>
                     <div className="--form-input-container">
-                        <label htmlFor="inp-email">{t('formEmail')}</label>
+                        <label htmlFor="emailOrUsername">{t('formEmail')}</label>
                         <div className="--form-input-style">
-                            <input type="text" id="inp-email" name="email"placeholder="youremail@example.com"/>
+                            <input type="text" id="inp-email" name="emailOrUsername" placeholder="youremail@example.com" onChange={((e) => setCredential(e.target.value))}/>
                         </div>
                     </div>
                     <div className="--form-input-container">
@@ -62,6 +63,10 @@ function Login() {
                     </div>
                     {setMismatchMessage && <p>{mismatchMessage}</p>}
                 </form>
+                <div className="--form-links">
+                    <a href="/signup">{t('formSignUpTitle')}</a>
+                    <a href="/forgot-password">{t('formForgotPassword')}</a>
+                </div>
             </div>
             <div className="--container-footer">
                 <p>&copy; 2025 Hanna. {t('footerCopyright')}</p>
