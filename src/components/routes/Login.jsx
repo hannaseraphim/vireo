@@ -49,9 +49,9 @@ function Login() {
             <p>{mismatchMessage}</p>
         </div>
         <form className="--form-content">
-            <img src="/assets/brand/vireo-brand-green.png" alt="" className='--form-logo'/>
+            <img src="/assets/brand/vireo-brand-green.png" alt="" className='--form-logo' />
             <div className="--input-content">
-                <input name="accountName" type="text" placeholder={t('formUserName')} required/>
+                <input name="emailOrUsername" type="text" placeholder={t('formUserName')} required onChange={((e) => setCredential(e.target.value))}/>
             </div>
             <div className="--input-content">
                 <input name="passwordHash" type={showPassword.main? 'password' : 'text'} placeholder={t('formPassword')} required aria-autocomplete='password' onChange={(e) => setPasswordMain(e.target.value)}/>
