@@ -12,7 +12,7 @@ const ProtectedRoute = ({children}) => {
         .catch(() => {setValid(false);});
     }, [])
 
-    if (valid === null) return <h1>Loading...</h1>
+    if (valid === null) return <img src="/assets/brand/vireo-brand-green.png" alt="" className="--form-logo"/>;
     if (!valid) return <Navigate to='/login'/>;
     return children;
 }
