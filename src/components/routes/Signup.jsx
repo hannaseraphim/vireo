@@ -26,7 +26,7 @@ function Signup() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(passwordMain !== passwordConfirm) {setMismatchMessage('The passwords are not the same');return;}
+        if(passwordMain !== passwordConfirm) {setMismatchMessage(t('errorPasswordsMismatch'));return;}
 
         const accountName = (e.target.accountName.value).toLowerCase()
         const nickName = accountName
@@ -51,55 +51,39 @@ function Signup() {
         })
     }
     return(
-        <div className="--container-auth-form">
-            <div className="--container-header">
-                <img src="/assets/brand/vireo-brand-green.png" alt="Vireo Logo with Green Bird and Name" draggable="false" />
-            </div>
-            <div className="--container-form">
-                <h1>{t('formSignUpTitle')}</h1>
-                <form className="--form-content" onSubmit={handleSubmit}>
+        <div className="--container-auth-form" onSubmit={handleSubmit}>
 
-
-
-                    <div className="--form-input-container">
-                        <label htmlFor="inp-accountName">{t('formUserName')}</label>
-                        <div className="--form-input-style">
-                            <input type="text" id="inp-accountName" name="accountName" required/>
-                        </div>
-                    </div>
-                    <div className="--form-input-container">
-                        <label htmlFor="inp-email">{t('formEmail')}</label>
-                        <div className="--form-input-style">
-                            <input type="text" id="inp-email" name="email"placeholder="youremail@example.com"/>
-                        </div>
-                    </div>
-                    <div className="--form-input-container">
-                        <label htmlFor="inp-passwordHash">{t('formPassword')}</label>
-                        <div className="--form-input-style">
-                            <input type={showPassword.main? 'password' : 'text'} id="inp-passwordHash" name="passwordHash" className='--form-input' required aria-autocomplete='password' onChange={(e) => setPasswordMain(e.target.value)} style={{position: 'relative'}}/> 
-                            <i className={`pi ${showPassword.main? 'pi-eye-slash' : 'pi-eye' }`} onClick={() => toggleVisibility('main')}/>
-                        </div>
-                    </div>
-                    <div className="--form-input-container">
-                        <label htmlFor="inp-passwordHashConfirm">{t('formConfirmPassword')}</label>
-                        <div className="--form-input-style">
-                            <input type={showPassword.confirm? 'password' : 'text'} id="inp-passwordHashConfirm" name="passwordHashConfirm" className='--form-pass' required aria-autocomplete='password' onChange={(e) => setPasswordConfirm(e.target.value)}/> 
-                            <i className={`pi ${showPassword.confirm? 'pi-eye-slash' : 'pi-eye'}`} onClick={() => toggleVisibility('confirm')}/>
-                        </div>
-                    </div>
-                    <div className="--form-input-container">
-                        <button type="submit" className='--form-button'>{t('formCreateAccount')}</button>
-                    </div>
-                    {setMismatchMessage && <p>{mismatchMessage}</p>}
-                </form>
-                <div className="--form-links">
-                    <a href="/login">{t('formLogInTitle')}</a>
-                    <a href="/forgot-password">{t('formForgotPassword')}</a>
-                </div>
+        <div className="--error-message" style={{opacity: mismatchMessage? '1' : '0'}}>
+            <p>{mismatchMessage}</p>
+        </div>
+        <form className="--form-content">
+            <img src="/assets/brand/vireo-brand-green.png" alt="" className='--form-logo'/>
+            <div className="--input-content">
+                <input name="accountName" type="text" placeholder={t('formUserName')} required/>
             </div>
-            <div className="--container-footer">
-                <p>&copy; 2025 Hanna. {t('footerCopyright')}</p>
+            <div className="--input-content">
+                <input name='email' type="email" placeholder={t('formEmail')} required/>
             </div>
+            <div className="--input-content">
+                <input name="passwordHash" type={showPassword.main? 'password' : 'text'} placeholder={t('formPassword')} required aria-autocomplete='password' onChange={(e) => setPasswordMain(e.target.value)}/>
+                <i className={`pi ${showPassword.main? 'pi-eye-slash' : 'pi-eye' }`} onClick={() => toggleVisibility('main')}/>
+            </div>
+            <div className="--input-content">
+                <input name="passwordHashConfirm" type={showPassword.confirm? 'password' : 'text'} placeholder={t('formConfirmPassword')} required aria-autocomplete='password' onChange={(e) => setPasswordConfirm(e.target.value)}/>
+                <i className={`pi ${showPassword.confirm? 'pi-eye-slash' : 'pi-eye'}`} onClick={() => toggleVisibility('confirm')}/>
+            </div>
+
+            <div className="--terms-agreement">
+                <input type="checkbox" name="agreeWithTerms" id="" required/>
+                <p>{t('formAgreeWithTerms')} <a href="/terms-of-use-and-service">{t('UITOUS')}</a></p>
+            </div>
+            <button className='--submit-button'>{t('formCreateAccount')}</button>
+            <p className='--have-account'>{t('formUserHaveAccount')} <a href="/login">{t('formLogin')}</a></p>
+        </form>
+
+        <div className="--footer">
+            <p>&copy; Hanna 2025. {t('footerCopyright')}</p>
+        </div>
         </div>
     )
 }

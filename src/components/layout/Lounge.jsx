@@ -21,7 +21,6 @@ function Lounge() {
         const fetchUser = async () => {
             try{
                 const apiUrl = import.meta.env.VITE_API_URL
-                
                 const res = await axios.get(`${apiUrl}/users/me`, {withCredentials: true});
                 setNickName(res.data.nickName);
                 let userTheme = res.data.preferedTheme || 'dark'
